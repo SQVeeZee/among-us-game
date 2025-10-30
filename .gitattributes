@@ -1,0 +1,63 @@
+# =============================
+#   Unity Project Attributes
+#   Target: macOS / Rider / Unity 2022.3
+# =============================
+
+# --- Line endings ---
+* text=auto eol=lf
+
+# --- Unity text assets (YAML) ---
+*.meta text
+*.unity text
+*.prefab text
+*.mat text
+*.anim text
+*.controller text
+*.overrideController text
+*.asset text
+*.asmdef text
+*.asmref text
+*.physicMaterial text
+*.shader text
+*.compute text
+*.cginc text
+*.hlsl text
+*.json text
+*.xml text
+*.yaml text
+*.yml text
+*.txt text
+*.md text
+*.editorconfig text
+
+# --- C# / IDE ---
+*.cs text diff=csharp
+*.csproj text
+*.sln text
+*.DotSettings text
+
+# --- Prevent binary merges (Unity will regenerate) ---
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.psd binary
+*.exr binary
+*.fbx binary
+*.obj binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.mp4 binary
+*.mov binary
+*.aif binary
+*.ttf binary
+*.otf binary
+*.zip binary
+*.dll binary
+*.so binary
+*.a binary
+*.bundle binary
+
+# --- Miscellaneous ---
+.DS_Store binary
