@@ -9,6 +9,20 @@
     "com.unity.modules.jsonserialize": "1.0.0",
     "com.unity.modules.ui": "1.0.0",
     "com.unity.modules.uielements": "1.0.0",
-    "com.unity.render-pipelines.universal": "14.0.11"
-  }
+    "com.unity.render-pipelines.universal": "14.0.11",
+    "com.cysharp.unitask": "2.5.7",
+    "com.playtika.controllers-tree": "1.2.0",
+    "jp.hadashikick.vcontainer": "1.17.0"
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.cysharp.unitask",
+        "jp.hadashikick.vcontainer",
+        "com.playtika.controllers-tree"
+      ]
+    }
+  ]
 }
