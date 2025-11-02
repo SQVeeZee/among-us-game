@@ -3,12 +3,12 @@ using VContainer;
 
 namespace MiniGames.SequenceRepeater
 {
-    public class ValidationController : ControllerWithResultBase<ValidationArgs, ValidationResult>
+    public class ClickValidationController : ControllerWithResultBase<ValidationArgs, ValidationResult>
     {
         private readonly LevelSequenceModel _sequencePatternModel;
 
         [Inject]
-        private ValidationController(
+        private ClickValidationController(
             IControllerFactory controllerFactory,
             LevelSequenceModel sequencePatternModel)
             : base(controllerFactory)
@@ -18,7 +18,7 @@ namespace MiniGames.SequenceRepeater
         {
             var id = Args.Id;
             var correct = _sequencePatternModel.ValidateStep(id);
-            Complete(correct ? ValidationResult.Correct : ValidationResult.Fail);
+            Complete(correct ? ValidationResult.Correct : ValidationResult.Wrong);
         }
     }
 }

@@ -17,6 +17,6 @@ namespace MiniGames.SequenceRepeater
             _gridItems.Add(item.Id, item);
         }
 
-        public void Clean() => _gridItems = null;
+        public void Clean() => _gridItems.Clear();
     }
 }

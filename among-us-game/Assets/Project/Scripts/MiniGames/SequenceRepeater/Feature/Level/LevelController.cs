@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Playtika.Controllers;
@@ -5,38 +6,49 @@ using VContainer;
 
 namespace MiniGames.SequenceRepeater
 {
-    public class LevelController : ControllerWithResultBase
+    public class LevelController : ControllerWithResultBase<LevelData, LevelResultType>
     {
         private readonly LevelModel _levelModel;
-        private readonly LevelService _levelService;
 
         [Inject]
         private LevelController(
             IControllerFactory controllerFactory,
             LevelModel levelModel,
-            LevelService levelService) : base(controllerFactory)
-        {
-            _levelModel = levelModel;
-            _levelService = levelService;
-        }
+            LevelService levelService)
+            : base(controllerFactory)
+            => _levelModel = levelModel;
 
         protected override void OnStart()
         {
-            ApplyCurrentLevel();
-
+            _levelModel.ApplyCurrentLevel(Args);
             Execute<LevelViewController>();
         }
 
         protected override async UniTask OnFlowAsync(CancellationToken cancellationToken)
         {
-            await ExecuteAndWaitResultAsync<PatternPlaybackController>(cancellationToken);
-            var result = await ExecuteAndWaitResultAsync<SelectSequenceController, SelectSequenceResult>(cancellationToken);
-        }
-
-        private void ApplyCurrentLevel()
-        {
-            var currentLevel = _levelService.GetCurrentLevel();
-            _levelModel.ApplyCurrentLevel(currentLevel);
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                await ExecuteAndWaitResultAsync<PatternPlaybackController>(cancellationToken);
+                var result = await ExecuteAndWaitResultAsync<InputLoopController, PatternProgressResult>(cancellationToken);
+                switch (result)
+                {
+                    case PatternProgressResult.Success:
+                        if (!_levelModel.IsLastStep())
+                        {
+                            Execute<LevelProgressIncreaseController>();
+                            break;
+                        }
+                        Execute<LevelProgressResetController>();
+                        Complete(LevelResultType.Completed);
+                        return;
+                    case PatternProgressResult.Fail:
+                        Execute<LevelProgressResetController>();
+                        Complete(LevelResultType.Fail);
+                        return;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
     }
 }

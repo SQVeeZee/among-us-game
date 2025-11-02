@@ -10,12 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b70fd70b1604bc7a63fd012ff30f4e0, type: 3}
-  m_Name: level_data_config
+  m_Name: level_data_config_1
   m_EditorClassIdentifier: 
   _tilesCount: 9
   _levelSequences:
   - _length: 1
-  - _length: 2
-  - _length: 3
-  - _length: 4
-  - _length: 5

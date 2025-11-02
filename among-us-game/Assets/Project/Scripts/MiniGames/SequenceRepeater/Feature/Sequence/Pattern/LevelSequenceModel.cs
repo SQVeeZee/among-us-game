@@ -20,6 +20,8 @@ namespace MiniGames.SequenceRepeater
 
         public void Increase() => _currentStep++;
 
+        public bool IsLastStep() => _currentStep == _sequence.Length - 1;
+
         public bool ValidateStep(int id)
         {
             if (_sequence.Length == 0)

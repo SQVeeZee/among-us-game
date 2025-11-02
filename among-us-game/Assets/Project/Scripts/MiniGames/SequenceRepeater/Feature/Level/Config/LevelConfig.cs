@@ -8,6 +8,7 @@ namespace MiniGames.SequenceRepeater
         [SerializeField]
         private LevelData[] _levelData;
 
-        public LevelData GetCurrentLevelData(int level) => _levelData[level - 1];
+        public int LevelsCount => _levelData.Length;
+        public LevelData GetLevelDataByIndex(int index) => _levelData[index];
     }
 }

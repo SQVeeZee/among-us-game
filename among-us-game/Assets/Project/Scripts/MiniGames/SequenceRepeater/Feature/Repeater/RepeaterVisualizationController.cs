@@ -10,28 +10,32 @@ namespace MiniGames.SequenceRepeater
     public class RepeaterVisualizationController : VisualizationControllerBase<RepeaterVisualizationArgs, EmptyControllerResult>
     {
         private readonly GridContext _gridContext;
-        private readonly RepeaterConfig _repeaterConfig;
+        private readonly RepeaterConfig _config;
+        private readonly HighlightConfig _highlightConfig;
 
         [Inject]
         private RepeaterVisualizationController(
             IControllerFactory controllerFactory,
             VisualizationService visualizationService,
             GridContext gridContext,
-            RepeaterConfig repeaterConfig)
+            RepeaterConfig repeaterConfig,
+            [Key(HighlightType.Repeater)] HighlightConfig highlightConfig)
             : base(controllerFactory, visualizationService)
         {
             _gridContext = gridContext;
-            _repeaterConfig = repeaterConfig;
+            _config = repeaterConfig;
+            _highlightConfig = highlightConfig;
         }
 
         protected override async UniTask OnVisualizing(CancellationToken cancellationToken)
         {
             var highlights = ResolveHighlights(Args.Ids);
-            var timeSpanDelay = TimeSpan.FromSeconds(_repeaterConfig.HighlightDelay);
+            var timeSpanDelay = TimeSpan.FromSeconds(_config.HighlightDelay);
 
-            foreach (var highlighted in highlights)
+            foreach (var id in highlights)
             {
-                await ExecuteAndWaitResultAsync<HighlightVisualizationController, IHighlighted, EmptyControllerResult>(highlighted, cancellationToken);
+                var args = new HighlightVisualizationArgs(id, _highlightConfig);
+                await ExecuteAndWaitResultAsync<HighlightVisualizationController, HighlightVisualizationArgs, EmptyControllerResult>(args, cancellationToken);
                 await UniTask.Delay(timeSpanDelay, cancellationToken: cancellationToken);
             }
 

@@ -40,6 +40,12 @@ namespace MiniGames.SequenceRepeater
             }
         }
 
+        protected override void OnStop()
+        {
+            _boardContext.UnBind();
+            _gridContext.Clean();
+        }
+
         private void CreateAndCacheItemPair(int id)
         {
             var boardView = _boardContext.BoardView;
@@ -48,5 +54,6 @@ namespace MiniGames.SequenceRepeater
             var itemPair = new GridItemPair(id, tileView, buttonView);
             _gridContext.Add(itemPair);
         }
+
     }
 }

@@ -22,7 +22,11 @@ namespace MiniGames.SequenceRepeater
 
         [Header("steps")]
         [SerializeField]
-        private HighlightConfig _highlightConfig;
+        private HighlightConfig _repeaterHighlightConfig;
+        [SerializeField]
+        private HighlightConfig _correctHighlightConfig;
+        [SerializeField]
+        private HighlightConfig _wrongHighlightConfig;
         [SerializeField]
         private RepeaterConfig _repeaterConfig;
 
@@ -51,22 +55,24 @@ namespace MiniGames.SequenceRepeater
 
         private void RegisterBoard(IContainerBuilder builder)
         {
-            builder.Register<BoardViewController>(Lifetime.Singleton);
+            builder.Register<BoardViewController>(Lifetime.Transient);
             builder.Register<BoardFactory>(Lifetime.Singleton);
             builder.Register<BoardContext>(Lifetime.Singleton);
             builder.RegisterInstance(_boardContainer);
             builder.RegisterInstance(_boardAssetsConfig);
 
-            builder.Register<GridViewController>(Lifetime.Singleton);
-            builder.Register<GridModel>(Lifetime.Scoped);
+
+            builder.Register<GridViewController>(Lifetime.Transient);
             builder.Register<GridFactory>(Lifetime.Singleton);
             builder.Register<GridContext>(Lifetime.Singleton);
+            builder.Register<GridModel>(Lifetime.Scoped);
             builder.RegisterInstance(_gridAssetsConfig);
         }
 
         private void RegisterSequencePattern(IContainerBuilder builder)
         {
             builder.Register<PatternPlaybackController>(Lifetime.Transient);
+            builder.Register<SequenceProgressController>(Lifetime.Transient);
             builder.Register<RepeaterVisualizationController>(Lifetime.Transient);
             builder.Register<SequenceGenerationController>(Lifetime.Transient);
             builder.RegisterInstance(_repeaterConfig);
@@ -76,16 +82,20 @@ namespace MiniGames.SequenceRepeater
             builder.Register<IncreaseSequenceProgressController>(Lifetime.Transient);
             builder.Register<ResetSequenceProgressController>(Lifetime.Transient);
 
-            builder.Register<SelectSequenceController>(Lifetime.Transient);
-            builder.Register<ValidationController>(Lifetime.Singleton);
-            builder.Register<CorrectSequenceController>(Lifetime.Transient);
+            builder.Register<InputLoopController>(Lifetime.Transient);
+
+            builder.Register<ClickValidationController>(Lifetime.Transient);
+            builder.Register<CorrectHighlightController>(Lifetime.Transient);
+            builder.Register<WrongHighlightController>(Lifetime.Transient);
         }
 
         private void RegisterHighlight(IContainerBuilder builder)
         {
             builder.Register<HighlightVisualizationController>(Lifetime.Transient);
-            builder.Register<HighlightVisualization>(Lifetime.Transient);
-            builder.RegisterInstance(_highlightConfig);
+            builder.Register<HighlightButtonController>(Lifetime.Transient);
+            builder.RegisterInstance(_repeaterHighlightConfig).Keyed(HighlightType.Repeater);
+            builder.RegisterInstance(_correctHighlightConfig).Keyed(HighlightType.Correct);
+            builder.RegisterInstance(_wrongHighlightConfig).Keyed(HighlightType.Wrong);
         }
 
         private void RegisterLevel(IContainerBuilder builder)

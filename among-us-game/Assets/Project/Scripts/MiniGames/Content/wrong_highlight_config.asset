@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e65e5927c9459f80bc33ae5ce513ca, type: 3}
-  m_Name: level_config
+  m_Script: {fileID: 11500000, guid: a7a388fd2eaf4c1b89082a9d98833cfa, type: 3}
+  m_Name: wrong_highlight_config
   m_EditorClassIdentifier: 
-  _levelData:
-  - {fileID: 11400000, guid: 408dabb86838e4a889994c00f5c107b1, type: 2}
-  - {fileID: 11400000, guid: 5a2004dd19e0f4201a65c20b358e8b6a, type: 2}
+  _startColor: {r: 0, g: 0, b: 0, a: 1}
+  _endColor: {r: 0.9622642, g: 0.20212291, b: 0.18609825, a: 1}
+  _duration: 0.5

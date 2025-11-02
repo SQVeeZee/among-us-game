@@ -462,7 +462,12 @@ MonoBehaviour:
   _boardContainer: {fileID: 54774007}
   _boardAssetsConfig: {fileID: 11400000, guid: 513539945a149419ca2e5bb8c05a66b0, type: 2}
   _gridAssetsConfig: {fileID: 11400000, guid: f253b6830120643b1a59c5fd6d372b70, type: 2}
-  _highlightConfig: {fileID: 11400000, guid: f5242715cf5b94a3eaab41d577227bff, type: 2}
+  _repeaterHighlightConfig: {fileID: 11400000, guid: fa5c1f7bc15f34e59b72c9bf6d8159db,
+    type: 2}
+  _correctHighlightConfig: {fileID: 11400000, guid: f5242715cf5b94a3eaab41d577227bff,
+    type: 2}
+  _wrongHighlightConfig: {fileID: 11400000, guid: 9baa924124f6e4d5793690cc73e58ce4,
+    type: 2}
   _repeaterConfig: {fileID: 11400000, guid: e63ddcd85d2be475685bb38582804f93, type: 2}
 --- !u!1 &1266351665
 GameObject:
