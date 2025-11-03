@@ -23,7 +23,7 @@ namespace PatternGame
         protected override void OnStop()
         {
             TrySetResult(PatternResult.None);
-            Dispose();
+            DisposeA();
         }
 
         private void Subscribe()
@@ -36,7 +36,7 @@ namespace PatternGame
             }
         }
 
-        private void Dispose()
+        private void DisposeA()
         {
             foreach (var item in _gridContext.Items)
             {
@@ -58,7 +58,7 @@ namespace PatternGame
             var result = await ExecuteAndWaitResultAsync<PatternProgressController, ClickResult, PatternResult>(clickResult, cancellationToken);
             if (result != PatternResult.None)
             {
-                Dispose();
+                DisposeA();
             }
             await ExecuteClickVisualization(id, clickResult, cancellationToken);
             if (result != PatternResult.None)

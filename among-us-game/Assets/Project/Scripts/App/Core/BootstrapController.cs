@@ -30,7 +30,7 @@ namespace App
                         await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: cancellationToken);
                         break;
                     case ModuleResult.Unknown:
-                        break;
+                        return;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

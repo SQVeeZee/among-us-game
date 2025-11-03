@@ -44,7 +44,7 @@ namespace PatternGame
 
         private static void RegisterCore(IContainerBuilder builder)
         {
-            builder.Register<ModuleController>(Lifetime.Transient).AsImplementedInterfaces().AsSelf();
+            builder.Register<ModuleController>(Lifetime.Transient);
         }
 
         private void RegisterLevel(IContainerBuilder builder)
