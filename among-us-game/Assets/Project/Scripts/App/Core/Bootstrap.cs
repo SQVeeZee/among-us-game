@@ -1,43 +1,21 @@
-using System;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using VContainer;
 using VContainer.Unity;
 
 namespace App
 {
-    public class Bootstrap : IStartable, IDisposable
+    public class Bootstrap : IAsyncStartable
     {
-        private readonly BootstrapRootController _bootstrapController;
-
-        private CancellationTokenSource _cancellationTokenSource = new();
+        private readonly BootstrapRootController _root;
 
         [Inject]
-        public Bootstrap(BootstrapRootController bootstrapController)
-        {
-            _bootstrapController = bootstrapController;
-        }
+        public Bootstrap(BootstrapRootController root) => _root = root;
 
-        void IStartable.Start()
+        public UniTask StartAsync(CancellationToken cancellationToken)
         {
-            try
-            {
-                _bootstrapController.LaunchTree(_cancellationTokenSource.Token);
-            }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception exception)
-            {
-                UnityEngine.Debug.LogError($"Can't start bootstrap controller {exception}");
-            }
-        }
-
-        void IDisposable.Dispose()
-        {
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource?.Dispose();
-
-            _cancellationTokenSource = null;
+            _root.LaunchTree(cancellationToken);
+            return UniTask.CompletedTask;
         }
     }
 }

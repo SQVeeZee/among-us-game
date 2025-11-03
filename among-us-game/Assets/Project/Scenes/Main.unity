@@ -455,8 +455,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: 
-  autoRun: 1
+    TypeName: App.AppLifetimeScope
+  autoRun: 0
   autoInjectGameObjects: []
   _levelConfig: {fileID: 11400000, guid: 8f90b0dff5b164f17942efce93439ade, type: 2}
   _boardContainer: {fileID: 54774007}
@@ -468,7 +468,8 @@ MonoBehaviour:
     type: 2}
   _wrongHighlightConfig: {fileID: 11400000, guid: 9baa924124f6e4d5793690cc73e58ce4,
     type: 2}
-  _repeaterConfig: {fileID: 11400000, guid: e63ddcd85d2be475685bb38582804f93, type: 2}
+  _patternPlaybackConfig: {fileID: 11400000, guid: e63ddcd85d2be475685bb38582804f93,
+    type: 2}
 --- !u!1 &1266351665
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1266351666
 Transform:
   m_ObjectHideFlags: 0
@@ -515,8 +516,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentReference:
     TypeName: 
-  autoRun: 0
+  autoRun: 1
   autoInjectGameObjects: []
+  _moduleLifetimeScope: {fileID: 642668672}
 --- !u!1 &1953707965
 GameObject:
   m_ObjectHideFlags: 0

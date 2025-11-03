@@ -7,21 +7,20 @@ namespace App
 {
     public class BootstrapRootController : RootController
     {
-
         [Inject]
-        private BootstrapRootController(
-            IControllerFactory controllerFactory) : base(controllerFactory)
+        private BootstrapRootController(IControllerFactory factory) : base(factory)
         {
         }
 
         protected override void OnStart()
         {
-            RunSequenceRepeaterAsync(CancellationToken).Forget();
             base.OnStart();
+            RunFlow(CancellationToken).Forget();
         }
 
-        private async UniTask RunSequenceRepeaterAsync(CancellationToken cancellationToken)
+        private async UniTask RunFlow(CancellationToken cancellationToken)
         {
+            var result = await ExecuteAndWaitResultAsync<BootstrapController, BootstrapResult>(cancellationToken);
         }
     }
 }

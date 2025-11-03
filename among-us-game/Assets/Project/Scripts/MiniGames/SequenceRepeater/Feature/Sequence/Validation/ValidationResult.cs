@@ -1,8 +1,0 @@
-namespace MiniGames.SequenceRepeater
-{
-    public enum ValidationResult
-    {
-        Correct = 1,
-        Wrong = 2,
-    }
-}

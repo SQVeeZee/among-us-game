@@ -8,10 +8,7 @@ namespace App
         private readonly IObjectResolver _container;
 
         [Inject]
-        public ControllerFactory(IObjectResolver container)
-        {
-            _container = container;
-        }
+        private ControllerFactory(IObjectResolver container) => _container = container;
 
         public IController Create<T>() where T : class, IController
         {
