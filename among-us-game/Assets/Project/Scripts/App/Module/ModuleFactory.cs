@@ -1,7 +1,6 @@
 using PatternGame;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace App
 {
@@ -13,13 +12,13 @@ namespace App
         [Inject]
         private ModuleFactory(
             ModuleLifetimeScope moduleLifetimeScope,
-            [Key("root")] Transform parentScope)
+            [Key(AppConstants.ModuleRoot)] Transform parentScope)
         {
             _moduleLifetimeScope = moduleLifetimeScope;
             _parentScope = parentScope;
         }
 
-        public ModuleLifetimeScope Create() => LifetimeScope.Instantiate(_moduleLifetimeScope, _parentScope);
+        public ModuleLifetimeScope Create() => Object.Instantiate(_moduleLifetimeScope, _parentScope);
         public void Dispose(ModuleLifetimeScope moduleLifetimeScope) => Object.Destroy(moduleLifetimeScope.gameObject);
     }
 }

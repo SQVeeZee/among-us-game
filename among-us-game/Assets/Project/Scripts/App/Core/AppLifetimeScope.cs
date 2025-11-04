@@ -10,7 +10,8 @@ namespace App
     {
         [SerializeField]
         private ModuleLifetimeScope _moduleLifetimeScope;
-        [Header("ui")]
+
+        [Header("UI")]
         [SerializeField]
         private Transform _panelRoot;
 
@@ -18,6 +19,7 @@ namespace App
         {
             RegisterCore(builder);
             RegisterModule(builder);
+            RegisterManager(builder);
         }
 
         private void RegisterCore(IContainerBuilder builder)
@@ -25,20 +27,24 @@ namespace App
             builder.RegisterEntryPoint<Bootstrap>();
             builder.Register<BootstrapRootController>(Lifetime.Singleton);
             builder.Register<BootstrapController>(Lifetime.Singleton);
+
             builder.Register<MultiScopeControllerFactory>(Lifetime.Singleton)
                 .As<IControllerFactory>()
                 .AsSelf();
+        }
 
-            builder.Register<ModuleFactory>(Lifetime.Singleton);
-            builder.RegisterInstance(gameObject.transform).Keyed("root");
-            builder.RegisterInstance(_panelRoot).Keyed(UIConstants.PanelRoot);
+        private void RegisterManager(IContainerBuilder builder)
+        {
+            builder.Register<ProgressManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
 
         private void RegisterModule(IContainerBuilder builder)
         {
-            builder.Register<ProgressManager>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<ModuleRunnerController>(Lifetime.Transient);
             builder.RegisterInstance(_moduleLifetimeScope);
+            builder.Register<ModuleFactory>(Lifetime.Singleton);
+            builder.RegisterInstance(gameObject.transform).Keyed(AppConstants.ModuleRoot);
+            builder.RegisterInstance(_panelRoot).Keyed(UIConstants.PanelRoot);
         }
     }
 }
