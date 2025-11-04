@@ -22,6 +22,7 @@ namespace PatternGame
 
         void IPatternProgress.Increase() => _currentStep++;
         bool IPatternProgress.IsLastStep() => _currentStep == _pattern.Length - 1;
+
         public void Reset()
         {
             _pattern = null;

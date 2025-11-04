@@ -2,8 +2,8 @@ namespace PatternGame
 {
     public enum PatternResult
     {
-        None = 0,
-        Completed = 1,
-        Failed = 2
+        Continue = 1,
+        Completed = 2,
+        Failed = 3
     }
 }

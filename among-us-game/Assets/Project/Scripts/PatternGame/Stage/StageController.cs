@@ -22,17 +22,17 @@ namespace PatternGame
 
         private async UniTask<StageResult> ExecuteSequenceAndWaitForResultAsync(CancellationToken cancellationToken)
         {
-            var result = await ExecutePatternAsyncAndWaitForResult(cancellationToken);
+            var result = await ExecutePatternAndWaitForResultAsync(cancellationToken);
             return result switch
             {
                 PatternResult.Completed => StageResult.Completed,
                 PatternResult.Failed => StageResult.Failed,
-                PatternResult.None => StageResult.None,
+                PatternResult.Continue => throw new ArgumentOutOfRangeException(),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private async UniTask<PatternResult> ExecutePatternAsyncAndWaitForResult(CancellationToken cancellationToken)
+        private async UniTask<PatternResult> ExecutePatternAndWaitForResultAsync(CancellationToken cancellationToken)
         {
             var tiles = Args.TilesCount;
             var length = Args.PatternData.Length;

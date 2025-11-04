@@ -18,17 +18,16 @@ namespace PatternGame
             : base(controllerFactory)
             => _gridContext = gridContext;
 
-        protected override void OnStart() => Subscribe();
-
-        protected override void OnStop()
+        protected override void OnStart()
         {
-            TrySetResult(PatternResult.None);
-            DisposeA();
+            _sequenceCompletionSource = new UniTaskCompletionSource<PatternResult>();
+            Subscribe();
         }
+
+        protected override void OnStop() => Dispose();
 
         private void Subscribe()
         {
-            _sequenceCompletionSource = new UniTaskCompletionSource<PatternResult>();
             foreach (var item in _gridContext.Items)
             {
                 var id = item.Id;
@@ -36,7 +35,7 @@ namespace PatternGame
             }
         }
 
-        private void DisposeA()
+        private void Dispose()
         {
             foreach (var item in _gridContext.Items)
             {
@@ -56,18 +55,19 @@ namespace PatternGame
         {
             var clickResult = await ExecuteAndWaitResultAsync<ClickValidationController, ValidationArgs, ClickResult>(new ValidationArgs(id), cancellationToken);
             var result = await ExecuteAndWaitResultAsync<PatternProgressController, ClickResult, PatternResult>(clickResult, cancellationToken);
-            if (result != PatternResult.None)
+            var isFinished = result == PatternResult.Completed || result == PatternResult.Failed;
+            if (isFinished)
             {
-                DisposeA();
+                Dispose();
             }
-            await ExecuteClickVisualization(id, clickResult, cancellationToken);
-            if (result != PatternResult.None)
+            await ExecuteClickVisualizationAsync(id, clickResult, cancellationToken);
+            if (isFinished)
             {
                 TrySetResult(result);
             }
         }
 
-        private async UniTask ExecuteClickVisualization(int id, ClickResult clickResult, CancellationToken cancellationToken)
+        private async UniTask ExecuteClickVisualizationAsync(int id, ClickResult clickResult, CancellationToken cancellationToken)
         {
             var args = new ButtonVisualizationArgs(id, clickResult);
             await ExecuteAndWaitResultAsync<ButtonVisualizationController, ButtonVisualizationArgs, EmptyControllerResult>(args, cancellationToken);

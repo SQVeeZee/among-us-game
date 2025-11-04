@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4227029563070872520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8232429425355987330}
+  - component: {fileID: 139134270068212143}
+  m_Layer: 0
+  m_Name: ModuleLifetimeScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8232429425355987330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4227029563070872520}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &139134270068212143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4227029563070872520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be28e244e120434f83c6ac56875f3113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: App.AppLifetimeScope
+  autoRun: 0
+  autoInjectGameObjects: []
+  _levelConfig: {fileID: 11400000, guid: 8f90b0dff5b164f17942efce93439ade, type: 2}
+  _panelRoot: {fileID: 0}
+  _gamePanelConfig: {fileID: 11400000, guid: a03edb36b3d8b437cbae68222a527104, type: 2}
+  _boardAssetsConfig: {fileID: 11400000, guid: 513539945a149419ca2e5bb8c05a66b0, type: 2}
+  _gridAssetsConfig: {fileID: 11400000, guid: f253b6830120643b1a59c5fd6d372b70, type: 2}
+  _repeaterHighlightConfig: {fileID: 11400000, guid: fa5c1f7bc15f34e59b72c9bf6d8159db,
+    type: 2}
+  _correctHighlightConfig: {fileID: 11400000, guid: f5242715cf5b94a3eaab41d577227bff,
+    type: 2}
+  _wrongHighlightConfig: {fileID: 11400000, guid: 9baa924124f6e4d5793690cc73e58ce4,
+    type: 2}
+  _patternPlaybackConfig: {fileID: 11400000, guid: e63ddcd85d2be475685bb38582804f93,
+    type: 2}

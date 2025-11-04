@@ -1,61 +1,28 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Playtika.Controllers;
-using UnityEngine;
 using VContainer;
 
 namespace PatternGame
 {
     public class HighlightVisualizationController : ControllerWithResultBase<HighlightVisualizationArgs, EmptyControllerResult>
     {
+        private readonly HighlightVisualizer _highlightVisualizer;
+
         [Inject]
         private HighlightVisualizationController(
-            IControllerFactory controllerFactory)
+            IControllerFactory controllerFactory,
+            HighlightVisualizer highlightVisualizer)
             : base(controllerFactory)
-        {
-        }
+            => _highlightVisualizer = highlightVisualizer;
 
         protected override async UniTask OnFlowAsync(CancellationToken cancellationToken)
         {
-            await Blink(Args.Highlighted, Args.Config, CancellationToken);
+            await BlinkAsync(Args.Highlighted, Args.Config, cancellationToken);
             Complete(new EmptyControllerResult());
         }
 
-        private static async UniTask Blink(IHighlighted highlighted, HighlightConfig config, CancellationToken cancellationToken)
-        {
-            var startColor = config.StartColor;
-            var endColor = config.EndColor;
-            var duration = config.Duration;
-            await Blink(highlighted, startColor, endColor, duration, cancellationToken);
-        }
-
-        private static async UniTask Blink(IHighlighted highlighted, Color startColor, Color endColor, float duration, CancellationToken cancellationToken)
-        {
-            await ChangeColor(highlighted, startColor, endColor, duration, cancellationToken);
-            await ChangeColor(highlighted, endColor, startColor, duration, cancellationToken);
-        }
-
-        private static async UniTask ChangeColor(IHighlighted highlighted, Color startColor, Color endColor, float duration, CancellationToken cancellationToken)
-        {
-            if (duration <= 0f)
-            {
-                highlighted.UpdateColor(endColor);
-                return;
-            }
-
-            var time = 0f;
-            while (time < duration)
-            {
-                time += Time.deltaTime;
-                var t = Mathf.Clamp01(time / duration);
-
-                var currentColor = Color32.Lerp(startColor, endColor, t);
-                highlighted.UpdateColor(currentColor);
-
-                await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken: cancellationToken);
-            }
-
-            highlighted.UpdateColor(endColor);
-        }
+        private async UniTask BlinkAsync(IHighlighted highlighted, HighlightConfig config, CancellationToken cancellationToken)
+            => await _highlightVisualizer.BlinkAsync(highlighted, config, cancellationToken);
     }
 }

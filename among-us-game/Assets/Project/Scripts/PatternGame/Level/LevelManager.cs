@@ -17,8 +17,7 @@ namespace PatternGame
             _levelConfig = levelConfig;
         }
 
-        public LevelData GetCurrentLevel()
-            => !IsOutOfRange() ? _levelConfig.GetLevelDataByIndex(_progressManager.CurrentLevelIndex) : GetRandomIndex();
+        public LevelData GetCurrentLevel() => !IsOutOfRange() ? _levelConfig.GetLevelDataByIndex(_progressManager.CurrentLevelIndex) : GetRandomIndex();
 
         private bool IsOutOfRange() => _progressManager.CurrentLevel > _levelConfig.LevelsCount;
 

@@ -48,8 +48,14 @@ namespace PatternGame
 
         private void DestroyPair(GridItemPair itemPair)
         {
-            _gridFactory.DestroyTileView(itemPair.TileView);
-            _gridFactory.DestroyButtonView(itemPair.ButtonView);
+            if (itemPair.TileView != null)
+            {
+                _gridFactory.DestroyTileView(itemPair.TileView);
+            }
+            if (itemPair.ButtonView != null)
+            {
+                _gridFactory.DestroyButtonView(itemPair.ButtonView);
+            }
         }
 
         private static int GetItemId(int index) => index;

@@ -25,18 +25,18 @@ namespace PatternGame
                     {
                         Execute<ResetPatternProgressController>();
                         Complete(PatternResult.Completed);
-                        break;
+                        return;
                     }
+                    Complete(PatternResult.Continue);
                     Execute<IncreasePatternProgressController>();
                     break;
                 case ClickResult.Wrong:
                     Execute<ResetPatternProgressController>();
                     Complete(PatternResult.Failed);
-                    break;
+                    return;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            Complete(PatternResult.None);
         }
     }
 }

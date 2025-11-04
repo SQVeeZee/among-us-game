@@ -5,33 +5,37 @@ namespace PatternGame
 {
     public class BoardViewController : ControllerBase
     {
-        private readonly BoardContainer _container;
+        private readonly IGameplayPanelContext _panelContext;
         private readonly BoardFactory _boardFactory;
         private readonly IBoardContext _boardContext;
 
         [Inject]
         private BoardViewController(
             IControllerFactory factory,
-            BoardContainer container,
+            IGameplayPanelContext panelContext,
             BoardFactory boardFactory,
             IBoardContext boardContext)
             : base(factory)
         {
-            _container = container;
+            _panelContext = panelContext;
             _boardFactory = boardFactory;
             _boardContext = boardContext;
         }
 
         protected override void OnStart()
         {
-            var boardView = _boardFactory.CreateBoard(_container.Root);
+            var panel = _panelContext.GameplayPanel;
+            var boardView = _boardFactory.CreateBoard(panel.ContentRoot);
             _boardContext.Bind(boardView);
         }
 
         protected override void OnStop()
         {
-            _boardFactory.Destroy(_boardContext.BoardView);
-            _boardContext.UnBind();
+            if (_boardContext.BoardView != null)
+            {
+                _boardFactory.Destroy(_boardContext.BoardView);
+                _boardContext.UnBind();
+            }
         }
     }
 }

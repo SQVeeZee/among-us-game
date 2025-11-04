@@ -122,64 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &54774005
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 54774006}
-  - component: {fileID: 54774007}
-  - component: {fileID: 54774008}
-  m_Layer: 5
-  m_Name: GameplayPanel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &54774006
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54774005}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1953707966}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &54774007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54774005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0de75413d7ca4f5c93d34ff6a1391557, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _root: {fileID: 54774006}
---- !u!222 &54774008
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54774005}
-  m_CullTransparentMesh: 1
 --- !u!1 &247720107
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,66 +352,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 247720108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &642668669
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 642668671}
-  - component: {fileID: 642668672}
-  m_Layer: 0
-  m_Name: ModuleLifetimeScope
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &642668671
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642668669}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &642668672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642668669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be28e244e120434f83c6ac56875f3113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: App.AppLifetimeScope
-  autoRun: 0
-  autoInjectGameObjects: []
-  _levelConfig: {fileID: 11400000, guid: 8f90b0dff5b164f17942efce93439ade, type: 2}
-  _boardContainer: {fileID: 54774007}
-  _boardAssetsConfig: {fileID: 11400000, guid: 513539945a149419ca2e5bb8c05a66b0, type: 2}
-  _gridAssetsConfig: {fileID: 11400000, guid: f253b6830120643b1a59c5fd6d372b70, type: 2}
-  _repeaterHighlightConfig: {fileID: 11400000, guid: fa5c1f7bc15f34e59b72c9bf6d8159db,
-    type: 2}
-  _correctHighlightConfig: {fileID: 11400000, guid: f5242715cf5b94a3eaab41d577227bff,
-    type: 2}
-  _wrongHighlightConfig: {fileID: 11400000, guid: 9baa924124f6e4d5793690cc73e58ce4,
-    type: 2}
-  _patternPlaybackConfig: {fileID: 11400000, guid: e63ddcd85d2be475685bb38582804f93,
-    type: 2}
 --- !u!1 &1266351665
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,7 +400,9 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _moduleLifetimeScope: {fileID: 642668672}
+  _moduleLifetimeScope: {fileID: 139134270068212143, guid: a6e3910e53509433493f398317497085,
+    type: 3}
+  _panelRoot: {fileID: 1953707966}
 --- !u!1 &1953707965
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,8 +433,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 54774006}
+  m_Children: []
   m_Father: {fileID: 247720108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -754,7 +637,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1266351666}
-  - {fileID: 642668671}
   - {fileID: 2133805764}
   - {fileID: 330585546}
   - {fileID: 247720108}

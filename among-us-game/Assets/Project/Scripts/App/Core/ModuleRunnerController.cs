@@ -8,17 +8,18 @@ namespace App
 {
     public class ModuleRunnerController : ControllerWithResultBase<EmptyControllerArg, ModuleResult>
     {
-        private readonly ModuleLifetimeScope _moduleLifetimeScope;
+        private readonly ModuleFactory _moduleFactory;
         private readonly MultiScopeControllerFactory _factory;
+        private ModuleLifetimeScope _module;
 
         [Inject]
         private ModuleRunnerController(
             IControllerFactory factory,
-            ModuleLifetimeScope moduleLifetimeScope,
+            ModuleFactory moduleFactory,
             MultiScopeControllerFactory multiFactory)
             : base(factory)
         {
-            _moduleLifetimeScope = moduleLifetimeScope;
+            _moduleFactory = moduleFactory;
             _factory = multiFactory;
         }
 
@@ -30,10 +31,16 @@ namespace App
 
         protected override void OnStart()
         {
-            _moduleLifetimeScope.Build();
-            _factory.SetModuleContainer(_moduleLifetimeScope.Container);
+            _module = _moduleFactory.Create();
+            _module.Build();
+            _factory.SetModuleContainer(_module.Container);
         }
 
-        protected override void OnStop() => _factory.ClearModuleContainer();
+        protected override void OnStop()
+        {
+            _module.Dispose();
+            _moduleFactory.Dispose(_module);
+            _factory.ClearModuleContainer();
+        }
     }
 }

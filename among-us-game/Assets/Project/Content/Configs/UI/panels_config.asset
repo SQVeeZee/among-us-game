@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7a388fd2eaf4c1b89082a9d98833cfa, type: 3}
-  m_Name: repeater_highlight_config 1
+  m_Script: {fileID: 11500000, guid: 553f1e1041b947778b466509d8da39b5, type: 3}
+  m_Name: panels_config
   m_EditorClassIdentifier: 
-  _startColor: {r: 0, g: 0, b: 0, a: 1}
-  _endColor: {r: 0.3012046, g: 1, b: 0.2216981, a: 1}
-  _duration: 0.3
+  _gameplayPanel: {fileID: 1748267413815951047, guid: 2c98970ff726e48319a3ff5660389401,
+    type: 3}

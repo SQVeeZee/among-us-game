@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a388fd2eaf4c1b89082a9d98833cfa, type: 3}
+  m_Name: playback_highlight_config
+  m_EditorClassIdentifier: 
+  _startColor: {r: 0, g: 0, b: 0, a: 1}
+  _endColor: {r: 0.86610836, g: 1, b: 0.2235294, a: 1}
+  _duration: 0.3

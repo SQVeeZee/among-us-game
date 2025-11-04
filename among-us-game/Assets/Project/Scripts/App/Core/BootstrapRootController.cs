@@ -18,7 +18,7 @@ namespace App
             RunFlow(CancellationToken).Forget();
         }
 
-        private async UniTask RunFlow(CancellationToken cancellationToken)
+        private async UniTaskVoid RunFlow(CancellationToken cancellationToken)
         {
             var result = await ExecuteAndWaitResultAsync<BootstrapController, BootstrapResult>(cancellationToken);
         }

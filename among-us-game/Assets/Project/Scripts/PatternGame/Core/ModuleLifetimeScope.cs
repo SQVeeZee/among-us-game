@@ -1,5 +1,3 @@
-using App;
-using Playtika.Controllers;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -12,9 +10,10 @@ namespace PatternGame
         [SerializeField]
         private LevelConfig _levelConfig;
 
-        [Header("board")]
         [SerializeField]
-        private BoardContainer _boardContainer;
+        private PanelsConfig _gamePanelConfig;
+
+        [Header("board")]
         [SerializeField]
         private BoardAssetsConfig _boardAssetsConfig;
         [SerializeField]
@@ -34,6 +33,7 @@ namespace PatternGame
         {
             RegisterCore(builder);
 
+            RegisterGameplayPanel(builder);
             RegisterLevel(builder);
             RegisterBoard(builder);
             RegisterStage(builder);
@@ -42,9 +42,20 @@ namespace PatternGame
             RegisterHighlight(builder);
         }
 
-        private static void RegisterCore(IContainerBuilder builder)
+        private void RegisterCore(IContainerBuilder builder)
         {
             builder.Register<ModuleController>(Lifetime.Transient);
+            builder.Register<GameController>(Lifetime.Transient);
+            builder.Register<UIContext>(Lifetime.Scoped).AsImplementedInterfaces();
+        }
+
+        private void RegisterGameplayPanel(IContainerBuilder builder)
+        {
+            builder.Register<GameplayPanelController>(Lifetime.Transient);
+            builder.Register<GameplayPanelInfoController>(Lifetime.Transient);
+            builder.Register<GameplayPanelInteractionController>(Lifetime.Transient);
+            builder.Register<PanelFactory>(Lifetime.Transient);
+            builder.RegisterInstance(_gamePanelConfig);
         }
 
         private void RegisterLevel(IContainerBuilder builder)
@@ -66,11 +77,10 @@ namespace PatternGame
         private void RegisterBoard(IContainerBuilder builder)
         {
             //context
-            builder.Register<BoardContext>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<BoardContext>(Lifetime.Scoped).AsImplementedInterfaces();
 
             //factory
             builder.RegisterInstance(_boardAssetsConfig);
-            builder.RegisterInstance(_boardContainer);
             builder.Register<BoardFactory>(Lifetime.Scoped);
             builder.Register<BoardViewController>(Lifetime.Transient);
 
@@ -125,6 +135,7 @@ namespace PatternGame
 
             //
             builder.Register<HighlightVisualizationController>(Lifetime.Transient);
+            builder.Register<HighlightVisualizer>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
         }
     }
 }
